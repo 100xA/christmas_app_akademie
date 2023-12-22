@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
       appBar: AppBar(title: const Text("Christmas Challenge")),
       body: SafeArea(
         child: Center(

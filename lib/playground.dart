@@ -9,6 +9,8 @@ void hackPassword(){
   /// Nutze den Wert der Methode (siehe Terminal bei Startup) um den Key herauszufinden.
   /// 志于道
   firstClue();
+
+ 
   
 }
 
