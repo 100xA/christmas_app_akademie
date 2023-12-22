@@ -13,7 +13,7 @@ class AuthScreen extends StatelessWidget {
         if (state is AuthLoading) {
           return const CircularProgressIndicator();
         } else if (state is Authenticated) {
-          return Scaffold(
+          return const Scaffold(
             body: SafeArea(
               child: Center(
                 child: Column(
@@ -32,8 +32,7 @@ class AuthScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                        "Leider hast du noch nicht die richtigen Parameter herausgefunden, better luck next time :D"),
+                    Text("Leider hast du noch nicht die richtigen Parameter herausgefunden, versuchs nochmal :)"),
                   ],
                 ),
               ),
@@ -46,8 +45,7 @@ class AuthScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                        "Ein unbekannter Fehler ist aufgetreten, versuche dich noch einmal anzumelden"),
+                    const Text("Ein unbekannter Fehler ist aufgetreten, versuche dich noch einmal anzumelden"),
                     ElevatedButton(
                       onPressed: () => Navigator.of(context).pop(),
                       child: const Text("Zur Welcome Page zurückkehren"),
