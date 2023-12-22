@@ -19,26 +19,15 @@ class AuthScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("du hast es geschafft, Congratulations!"),
+                    Text("Du hast es geschafft, Congratulations!"),
+                    Image(image: AssetImage("assets/images/SantaTransparent.webp")),
                   ],
                 ),
               ),
             ),
           );
-        } else if (state is Unauthenticated) {
-          return const Scaffold(
-            body: SafeArea(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Leider hast du noch nicht die richtigen Parameter herausgefunden, versuchs nochmal :)"),
-                  ],
-                ),
-              ),
-            ),
-          );
-        } else {
+        } 
+        else {
           return Scaffold(
             body: SafeArea(
               child: Center(

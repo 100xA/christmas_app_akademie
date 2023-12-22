@@ -1,39 +1,84 @@
+import 'dart:convert';
+
 import 'package:bloc_fb_auth/features/auth/bloc/auth_state.dart';
 import 'package:bloc_fb_auth/features/auth/ui/auth_screen.dart';
-import 'package:bloc_fb_auth/features/auth/ui/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../repo/auth_repo.dart';
+
+var passwordKey;
+var db = FirebaseFirestore.instance;
 
 class AuthCubit extends Cubit<AuthState> {
-  final AuthRepository _authRepository;
-  final FirebaseAuth _firebaseAuth;
   var db = FirebaseFirestore.instance;
-  AuthCubit(this._firebaseAuth, this._authRepository, super.initialState);
+  AuthCubit(super.initialState);
 
-  Future<void> checkInput(String email, String password, BuildContext context) async {
+  Future<void> checkInput(
+      String email, String password, BuildContext context) async {
     var value = "";
+    var value2 = "";
 
-// Searching with where
-    await db.collection("santas_workshop").where("Name", isEqualTo: "TestSanta").get().then((event) {
+    await db
+        .collection("santas_workshop")
+        .where("Name", isEqualTo: "TestSanta")
+        .get()
+        .then((event) {
       for (var doc in event.docs) {
         value = doc.data()["Name"];
       }
     });
-    if (value == email) {
-      Navigator.push(
+    await db
+        .collection("santas_password")
+        .where("Password", isEqualTo: "123NIV")
+        .get()
+        .then((event) {
+      for (var doc in event.docs) {
+        value2 = doc.data()["Password"];
+      }
+    });
+    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+    passwordKey = stringToBase64.encode(value2);
+
+    if (value == email && passwordKey == password) {
+      if(context.mounted){Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AuthScreen()),
-      );
+        MaterialPageRoute(builder: (context) => const AuthScreen()),
+      );}
+      
       emit(Authenticated("Success", email));
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AuthScreen()),
-      );
+
+      if(context.mounted){
+ ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Leider hast du noch nicht die richtigen Parameter herausgefunden, versuchs nochmal :)'),
+          ),
+        );
+      }
+     
       emit(Unauthenticated());
     }
   }
+
+
+ 
 }
+ Future<void> firstClue() async{
+    String pw ="";
+    await db
+        .collection("santas_password")
+        .where("Password", isEqualTo: "123NIV")
+        .get()
+        .then((event) {
+      for (var doc in event.docs) {
+        pw = doc.data()["Password"];
+        Codec<String, String> stringToBase64 = utf8.fuse(base64);
+        passwordKey = stringToBase64.encode(pw);
+        print(passwordKey);
+      }
+    });
+    
+
+
+  }

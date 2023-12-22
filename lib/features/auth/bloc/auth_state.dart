@@ -35,21 +35,3 @@ class Unauthenticated extends AuthState {
   List<Object> get props => [];
 }
 
-/// Zustand, wenn bei der Authentifizierung ein Fehler auftritt
-class AuthError extends AuthState {
-  final String message;
-  const AuthError(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
-
-/// Zustand, wenn eine Authentifizierungsanforderung gestellt wird
-class AuthRequest extends AuthState {
-  final String message;
-
-  const AuthRequest(this.message);
-
-  @override
-  List<Object> get props => [message];
-}

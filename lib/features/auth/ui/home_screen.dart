@@ -11,21 +11,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: AppBar(title: const Text("Christmas Challenge")),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              BlocConsumer<AuthCubit, AuthState>(
-                listener: (context, state) {
-                  if (state is AuthError) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(state.message),
-                      duration: const Duration(seconds: 1),
-                    ));
-                  }
-                },
+              BlocBuilder<AuthCubit, AuthState>(
+              
                 builder: (context, state) {
                   return Form(
                     child: Padding(
@@ -35,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                           TextFormField(
                             controller: _emailController,
                             decoration:
-                                const InputDecoration(labelText: 'Email'),
+                                const InputDecoration(labelText: 'Name'),
                           ),
                           TextFormField(
                             controller: _passwordController,
@@ -45,12 +39,25 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () =>
-                                context.read<AuthCubit>().checkInput(
+                            onPressed: () {
+                            if(_emailController.text.isNotEmpty && _passwordController.text.isNotEmpty){
+                                    context.read<AuthCubit>().checkInput(
                                       _emailController.text,
                                       _passwordController.text,
                                       context,
-                                    ),
+                                    );
+                            }
+                            else{
+                              ScaffoldMessenger.of(context).showSnackBar(
+const SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Leerer Input'),
+          ),
+        );
+      
+                            }
+                                
+                            },
                             child: const Text('Versuche es'),
                           ),
                         ],
