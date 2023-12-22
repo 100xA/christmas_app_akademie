@@ -14,19 +14,11 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this._firebaseAuth, this._authRepository, super.initialState);
 
   Future<void> checkInput(String email, String password, BuildContext context) async {
-    //DocumentReference<Map<String, dynamic>> queryEmail = FirebaseFirestore.instance.collection("santas_workshop").doc("Santa");
-    /* await db.collection("santas_workshop").get().then((event) {
-      for (var doc in event.docs) {
-        print("${doc.id} => ${doc.data()}");
-      }
-    });
-*/
     var value = "";
 
 // Searching with where
     await db.collection("santas_workshop").where("Name", isEqualTo: "TestSanta").get().then((event) {
       for (var doc in event.docs) {
-        // print("${doc.id} => ${doc.data()}");
         value = doc.data()["Name"];
       }
     });
