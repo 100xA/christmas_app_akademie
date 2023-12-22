@@ -30,7 +30,7 @@ class BlocAuthFbApp extends StatelessWidget {
         routes: {
           "/auth": (context) => const AuthScreen(),
         },
-        title: 'Flutter Bloc Auth',
+        title: 'Christmas Challenge',
         theme: ThemeData.dark(),
         home: HomeScreen(),
       ),

@@ -19,13 +19,7 @@ class AuthScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(state.message),
-                    Text(state.email),
-                    ElevatedButton(
-                      onPressed: () =>
-                          context.read<AuthCubit>().signOut(context),
-                      child: const Text("Ausloggen"),
-                    ),
+                    Text("du hast es geschafft, Congratulations!"),
                   ],
                 ),
               ),
@@ -38,20 +32,8 @@ class AuthScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Nicht authentifiziert"),
-                  ],
-                ),
-              ),
-            ),
-          );
-        } else if (state is AuthRequest) {
-          return Scaffold(
-            body: SafeArea(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(state.message),
+                    Text(
+                        "Leider hast du noch nicht die richtigen Parameter herausgefunden, better luck next time :D"),
                   ],
                 ),
               ),

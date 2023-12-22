@@ -1,6 +1,6 @@
 {
-    "name": "bloc_fb_auth",
-    "short_name": "bloc_fb_auth",
+    "name": "christmas_app_akademie",
+    "short_name": "christmas_app_akademie",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -11,18 +11,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Christmas Challenge")),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("Google Registration"),
-              ElevatedButton(
-                onPressed: () {
-                  context.read<AuthCubit>().signInWithGoogle(context);
-                },
-                child: const Text("Sign In with Google"),
-              ),
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state is AuthError) {
@@ -49,15 +43,15 @@ class HomeScreen extends StatelessWidget {
                                 const InputDecoration(labelText: 'Password'),
                             obscureText: true,
                           ),
+                          const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () => context
-                                .read<AuthCubit>()
-                                .loginWithEmailPassword(
-                                  _emailController.text,
-                                  _passwordController.text,
-                                  context,
-                                ),
-                            child: const Text('Log In'),
+                            onPressed: () =>
+                                context.read<AuthCubit>().checkInput(
+                                      _emailController.text,
+                                      _passwordController.text,
+                                      context,
+                                    ),
+                            child: const Text('Versuche es'),
                           ),
                         ],
                       ),
